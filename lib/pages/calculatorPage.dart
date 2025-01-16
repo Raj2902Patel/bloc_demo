@@ -55,7 +55,7 @@ class CalculatorPage extends StatelessWidget {
               const SizedBox(height: 20),
               Center(
                 child: Text(
-                  "Answer is: $result",
+                  "Answer is: ${result.toStringAsFixed(2)}",
                   style: const TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 20.0,
@@ -75,10 +75,23 @@ class CalculatorPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(13.0),
                             )),
                         onPressed: () {
-                          context.read<CalculatorCubit>().addition(
-                              double.parse(num1Controller.text),
-                              double.tryParse(num2Controller.text) ?? 0);
-                          print("Addition Button Pressed");
+                          FocusScope.of(context)
+                              .unfocus(); // Dismiss the keyboard
+                          if (num1Controller.text.isNotEmpty &&
+                              num2Controller.text.isNotEmpty) {
+                            context.read<CalculatorCubit>().addition(
+                                double.parse(num1Controller.text),
+                                double.tryParse(num2Controller.text) ?? 0);
+                            print("Addition Button Pressed");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Center(
+                                  child: Text("Numbers Can't be Empty!"),
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           "Addition",
@@ -99,10 +112,23 @@ class CalculatorPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(13.0),
                             )),
                         onPressed: () {
-                          context.read<CalculatorCubit>().subtraction(
-                              double.parse(num1Controller.text),
-                              double.tryParse(num2Controller.text) ?? 0);
-                          print("Subtraction Button Pressed");
+                          FocusScope.of(context)
+                              .unfocus(); // Dismiss the keyboard
+                          if (num1Controller.text.isNotEmpty &&
+                              num2Controller.text.isNotEmpty) {
+                            context.read<CalculatorCubit>().subtraction(
+                                double.parse(num1Controller.text),
+                                double.tryParse(num2Controller.text) ?? 0);
+                            print("Subtraction Button Pressed");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Center(
+                                  child: Text("Numbers Can't be Empty!"),
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           "Subtraction",
@@ -128,10 +154,23 @@ class CalculatorPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(13.0),
                             )),
                         onPressed: () {
-                          context.read<CalculatorCubit>().multiplication(
-                              double.parse(num1Controller.text),
-                              double.tryParse(num2Controller.text) ?? 0);
-                          print("Multiplication Button Pressed");
+                          FocusScope.of(context)
+                              .unfocus(); // Dismiss the keyboard
+                          if (num1Controller.text.isNotEmpty &&
+                              num2Controller.text.isNotEmpty) {
+                            context.read<CalculatorCubit>().multiplication(
+                                double.parse(num1Controller.text),
+                                double.tryParse(num2Controller.text) ?? 0);
+                            print("Multiplication Button Pressed");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Center(
+                                  child: Text("Numbers Can't be Empty!"),
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           "Multiplication",
@@ -152,10 +191,23 @@ class CalculatorPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(13.0),
                             )),
                         onPressed: () {
-                          context.read<CalculatorCubit>().division(
-                              double.parse(num1Controller.text),
-                              double.tryParse(num2Controller.text) ?? 0);
-                          print("Division Button Pressed");
+                          FocusScope.of(context)
+                              .unfocus(); // Dismiss the keyboard
+                          if (num1Controller.text.isNotEmpty &&
+                              num2Controller.text.isNotEmpty) {
+                            context.read<CalculatorCubit>().division(
+                                double.parse(num1Controller.text),
+                                double.tryParse(num2Controller.text) ?? 0);
+                            print("Division Button Pressed");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Center(
+                                  child: Text("Numbers Can't be Empty!"),
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           "Division",
@@ -171,6 +223,14 @@ class CalculatorPage extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              context.read<CalculatorCubit>().clearResult();
+              num1Controller.clear();
+              num2Controller.clear();
+            },
+            child: Icon(CupertinoIcons.refresh),
           ),
         );
       },
