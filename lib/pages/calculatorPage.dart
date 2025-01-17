@@ -1,4 +1,5 @@
 import 'package:bloc_demo/bloc/calculator/calculatorCubit.dart';
+import 'package:bloc_demo/stream&sink/stream_sink_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +20,24 @@ class CalculatorPage extends StatelessWidget {
             toolbarHeight: 60,
             backgroundColor: Colors.blue.withOpacity(0.3),
             title: const Text("CalculatorPage"),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20.0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const StreamSinkPage(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.next_plan_outlined,
+                  ),
+                ),
+              )
+            ],
           ),
           body: Column(
             children: [
@@ -81,7 +100,7 @@ class CalculatorPage extends StatelessWidget {
                               num2Controller.text.isNotEmpty) {
                             context.read<CalculatorCubit>().addition(
                                 double.parse(num1Controller.text),
-                                double.tryParse(num2Controller.text) ?? 0);
+                                double.parse(num2Controller.text));
                             print("Addition Button Pressed");
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -230,7 +249,7 @@ class CalculatorPage extends StatelessWidget {
               num1Controller.clear();
               num2Controller.clear();
             },
-            child: Icon(CupertinoIcons.refresh),
+            child: const Icon(CupertinoIcons.refresh),
           ),
         );
       },
