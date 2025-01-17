@@ -43,7 +43,7 @@ class _PageTwoState extends State<PageTwo> {
                 "Not Clicked!",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 100.0,
+                  fontSize: 20.0,
                 ),
               );
             }
