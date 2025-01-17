@@ -1,5 +1,5 @@
+import 'package:bloc_demo/bloc/calculator/calculatorPage.dart';
 import 'package:bloc_demo/bloc/cubit/counterCubit.dart';
-import 'package:bloc_demo/pages/calculatorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
